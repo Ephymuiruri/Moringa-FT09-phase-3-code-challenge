@@ -1,37 +1,27 @@
 from database.setup import create_tables
+from database.setup import drop_tables
 from database.connection import get_db_connection
 from models.article import Article
 from models.author import Author
 from models.magazine import Magazine
 
+
 def main():
     # Initialize the database and create tables
+    drop_tables()
     create_tables()
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    author_name = "Jane Doe"
-    magazine_name = "Vogue"
-    magazine_category = "Fashion"
-    article_title = "The Latest Trends in Sustainable Fashion"
-    article_content =" Sustainability is becoming an increasingly important concern in the fashion industry."
-
-    # Create an author
-    cursor.execute('INSERT INTO authors (name) VALUES (?)', (author_name,))
-    author_id = cursor.lastrowid # Use this to fetch the id of the newly created author
-
-    # Create a magazine
-    cursor.execute('INSERT INTO magazines (name, category) VALUES (?,?)', (magazine_name, magazine_category))
-    magazine_id = cursor.lastrowid # Use this to fetch the id of the newly created magazine
-
-    # Create an article
-    cursor.execute('INSERT INTO articles (title, content, author_id, magazine_id) VALUES (?, ?, ?, ?)',
-                   (article_title, article_content, author_id, magazine_id))
-
-    conn.commit()
-
-    # Query the database for inserted records. 
-    # The following fetch functionality should probably be in their respective models
-
+    Author1=Author.create_author("Joan")
+    Author2=Author.create_author("Emily")
+    magazine1=Magazine.create_magazine("National Geographic","Science")
+    magazine2=Magazine.create_magazine("Vogue","Fashion")
+    article1 =Article.create_article(Author1,magazine1,"The Secrets of the Ocean Trench","The ocean trenches are some of the most mysterious and least explored places on Earth.")
+    article2 =Article.create_article(Author2,magazine1,"TThe Latest Trends in Sustainable Fashion","ustainability is becoming an increasingly important concern in the fashion industry.")
+    #print(article1.get_Author(),article1.get_magazine())
+    #print(article2.get_Author(),article2.get_magazine())
+    #print(Author1.articles())
+    print(Author1.magazines())
+    print(magazine1.articles())
+    print(magazine1.contributers())
 
 if __name__ == "__main__":
     main()
