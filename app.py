@@ -20,11 +20,11 @@ def main():
     print(article2.get_Author(),article2.get_magazine())
     print(Author1.articles())
     print(magazine1)
-    #print(Author1.magazines())
-    #print(magazine1.articles())
-    #print(magazine1.contributers())
-    #print(magazine1.article_titles())
-    #print(magazine1.contributing_authors())
+    print(Author1.magazines())
+    print(magazine1.articles())
+    print(magazine1.contributers())
+    print(magazine1.article_titles())
+    print(magazine1.contributing_authors())
 
 if __name__ == "__main__":
     main()
