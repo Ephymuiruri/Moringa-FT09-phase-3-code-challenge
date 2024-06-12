@@ -16,7 +16,7 @@ class Article:
         return self._title
     @title.setter
     def title(self, title):
-        if hasattr(self, 'title'):
+        if hasattr(self, '_title'):
             raise AttributeError("Article title cannot be changed")
         if not isinstance(title,str) and len(title) >= 5 and len(title) <= 50:
             raise AttributeError('title must be a string and between 5 and 50 characters')
@@ -65,3 +65,4 @@ class Article:
     def create_article(cls,author,magazine,title,content):
         """Create a new Article instance"""
         return cls(author,magazine,title,content)
+    
